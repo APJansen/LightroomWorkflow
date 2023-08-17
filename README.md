@@ -11,3 +11,9 @@
 5. Wait until it's finished and reset Lightroom
 6. Select the main photo and run the 'apply_profile' script
 
+# References
+
+I found out about the existance of scripting for Lightroom [here](https://www.photofacts.nl/fotografie/rubriek/software/je-workflow-verbeteren-met-je-eigen-lightroom-scripts.asp), which also has some useful starting scripts.
+
+The copy to clipboard functionality in Lua was adapted from [here](https://gist.github.com/AndrewHazelden/b9909520490624305183f7c8f77368a2), which also has implementations for other operating systems.
+
