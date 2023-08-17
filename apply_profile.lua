@@ -3,7 +3,7 @@
 local LrTasks = import 'LrTasks'
 local catalog = import "LrApplication".activeCatalog()
 local LrDialogs = import 'LrDialogs'
-local LrView = import 'LrView'
+local LrApplicationView = import 'LrApplicationView'
 
 
 LrTasks.startAsyncTask( function()
@@ -12,6 +12,6 @@ LrTasks.startAsyncTask( function()
     main_photo.catalog:withWriteAccessDo("Apply profile", function()
         main_photo:applyDevelopSettings({CameraProfile = number})
     end)
-    -- TODO: open it in the develop module?
+    LrApplicationView.switchToModule('develop')
 end)
 
