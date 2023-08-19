@@ -1,3 +1,5 @@
+property PROFILE_FOLDER : "/Users/aronjansen/Library/Application Support/Adobe/CameraRaw/CameraProfiles"
+
 on run argv
     -- Check if the right number of arguments are passed.
 
@@ -31,7 +33,7 @@ on run argv
     end tell
 
     -- Step 3: Fill in and click through the export dialog.
-    delay 8
+    delay 7
     tell application "System Events"
         tell process "Adobe Lightroom Classic"
             set frontWindow to front window
@@ -46,6 +48,41 @@ on run argv
             on error errorMessage
                 log "Error setting text field: " & errorMessage
             end try
+        end tell
+    end tell
+
+    -- Step 4: Wait until profile is created and restart lightroom
+    -- Wait for the profile file to be created
+    set targetFile to PROFILE_FOLDER & "/" & painting_number & ".dcp"
+    set fileExists to false
+    repeat until fileExists
+        delay 0.5
+        set fileExists to (do shell script "[ -f " & quoted form of targetFile & " ] && echo 'true' || echo 'false'") is "true"
+    end repeat
+    delay 0.5
+    -- Press enter to close the profile export confirmation
+    tell application "System Events"
+        tell process "Adobe Lightroom Classic"
+            keystroke return
+        end tell
+    end tell
+    -- Restart Lightroom
+    tell application "Adobe Lightroom Classic"
+        quit
+        delay 5
+        activate
+        delay 5
+    end tell
+    -- Finally run the '2 - apply profile' script
+    tell application "System Events"
+        tell process "Adobe Lightroom Classic"
+            set numOfMenuItems to count menu bar items of menu bar 1
+            tell menu bar item numOfMenuItems of menu bar 1
+                click
+                tell menu 1
+                    click menu item "2 - apply profile"
+                end tell
+            end tell
         end tell
     end tell
 end run

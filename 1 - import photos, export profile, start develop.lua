@@ -4,7 +4,6 @@ local LrDialogs = import 'LrDialogs'
 local LrFileUtils = import 'LrFileUtils'
 local LrApplicationView = import 'LrApplicationView'
 local LrApplication = import 'LrApplication'
-local LrDevelopController = import 'LrDevelopController'
 
 
 LrTasks.startAsyncTask( function()
@@ -14,7 +13,7 @@ LrTasks.startAsyncTask( function()
     ApplyMetadataPresets(main_photo, colorchecker_photo, flatfield_photo)
     startProfileExport(number, colorchecker_photo)
     LrTasks.sleep(1)  -- seems necessary, but don't actually have to finish dialog
-    startDeveloping(main_photo)
+    catalog:setSelectedPhotos(main_photo, {})
 end)
 
 
@@ -152,13 +151,6 @@ function startProfileExport(number, colorchecker_photo)
     CopyToClipboard(number)
     catalog:setSelectedPhotos(colorchecker_photo, {})
     colorchecker_photo.openExportDialog()
-end
-
-
--- Starts the develop module for the main_photo and selects the guided transform tool
-function startDeveloping(main_photo)
-    catalog:setSelectedPhotos(main_photo, {})
-    LrApplicationView.switchToModule("develop")
 end
 
 

@@ -8,11 +8,7 @@
 # Usage
 1. Take 3 photos in the order flatfield, colorchecker, main
 2. Run `osascript import.scpt session number` where `session` is a folder in lightroom and `number` is the number of the photographed painting
-3. Wait until the dialog box is gone (filled automatically), you end in develop mode, so straighten out the photo using guided transform, and crop it.
-5. Restart lightroom (this is necessary for it to see the new profile), and run the second script to apply the profile
-6. You end in develop mode where manual tweaks can be made.
-
-Note step 2 is an apple script that first runs the bash script and then navigates the Lightroom menu to start the importing script.
+3. Wait for about a minute as the profile is generated, lightroom restarts and the profile is applied
 
 # References
 
