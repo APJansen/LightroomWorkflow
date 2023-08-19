@@ -25,7 +25,7 @@ function AddPhotosFromFolder()
     -- find the folder
     for _, source in ipairs(sources) do
         if source.getName then
-            local folder = source
+            folder = source
         end
     end
 
