@@ -1,15 +1,18 @@
 # Setup
 
-1. Edit `copy_scripts.sh` to point to your Lightroom Scripts path (the scripts folder may not exist, it will be created)
-2. Restart lightroom to make them appear on the menu bar, to the right of 'help'
+1. Edit `copy_scripts.sh` to point to your Lightroom Scripts path and run it (`./copy_scripts.sh`) (the scripts folder may not exist, it will be created)
+2. Edit `rename_files.sh` to point to a folder that the tether software stores photos in, and to a target folder within lightroom
+3. Restart lightroom to make the scripts appear on the menu bar, to the right of 'help'
+4. In the grid view, turn on a filter for the highres keyword, and lock it
 
 # Usage
-1. Straighten and crop the main photo
-2. Select the 3 photos of a painting and run the 'create_profile' script
-3. Confirm to copy over modifications
-4. in the export dialog copy into the 'DNG Profile Name', the correct name will have been put in clipboard already. (For some reason the pasted text will only show up after clicking elsewhere)
-5. Wait until it's finished and reset Lightroom
-6. Select the main photo and run the 'apply_profile' script
+1. Take 3 photos in the order flatfield, colorchecker, main
+2. Run `./rename_files.sh session number` where `session` is a folder in lightroom and `number` is the number of the photographed painting
+3. In lightroom, run the first script (far right in the top menu bar)
+4. A dialog opens up where you need to paste the automatically copied number into the name and click ok. The color profile is being exported in the background, and you're now in develop mode on the main photo.
+5. Straighten it out using guided transform, and crop it.
+6. Restart lightroom (this is necessary for it to see the new profile), and run the second script to apply the profile
+7. You end in develop mode where manual tweaks can be made.
 
 # References
 
