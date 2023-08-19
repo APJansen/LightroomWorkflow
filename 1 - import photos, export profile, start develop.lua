@@ -153,7 +153,7 @@ end
 function startProfileExport(number, colorchecker_photo)
     CopyToClipboard(number)
     catalog:setSelectedPhotos(colorchecker_photo, {})
-    colorchecker_photo.openExportDialog()
+    colorchecker_photo:openExportDialog()
 end
 
 

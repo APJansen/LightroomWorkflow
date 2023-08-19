@@ -85,4 +85,5 @@ on run argv
             end tell
         end tell
     end tell
+    return
 end run

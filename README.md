@@ -6,7 +6,7 @@
 
 # Usage
 1. Take 3 photos in the order flatfield, colorchecker, main
-2. Run `osascript import.scpt session number` where `session` is a folder in lightroom and `number` is the number of the photographed painting
+2. Run `osascript import.scpt session number` where `session` is a folder in lightroom (**make sure this exists and is the only selected folder in lightroom**) and `number` is the number of the photographed painting
 3. Wait for about a minute as the profile is generated, lightroom restarts and the profile is applied
 
 # References
