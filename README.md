@@ -7,12 +7,13 @@
 
 # Usage
 1. Take 3 photos in the order flatfield, colorchecker, main
-2. Run `./rename_files.sh session number` where `session` is a folder in lightroom and `number` is the number of the photographed painting
-3. In lightroom, run the first script (far right in the top menu bar)
-4. A dialog opens up where you need to paste the automatically copied number into the name and click ok. The color profile is being exported in the background, and you're now in develop mode on the main photo.
-5. Straighten it out using guided transform, and crop it.
-6. Restart lightroom (this is necessary for it to see the new profile), and run the second script to apply the profile
-7. You end in develop mode where manual tweaks can be made.
+2. Run `osascript import.scpt session number` where `session` is a folder in lightroom and `number` is the number of the photographed painting
+3. Lightroom activates and a dialog opens up where you need to paste the automatically copied number into the name and click ok. The color profile is being exported in the background, and you're now in develop mode on the main photo.
+4. Straighten it out using guided transform, and crop it.
+5. Restart lightroom (this is necessary for it to see the new profile), and run the second script to apply the profile
+6. You end in develop mode where manual tweaks can be made.
+
+Note step 2 is an apple script that first runs the bash script and then navigates the Lightroom menu to start the importing script.
 
 # References
 
