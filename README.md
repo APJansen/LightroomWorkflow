@@ -8,8 +8,7 @@
 # Usage
 1. Take 3 photos in the order flatfield, colorchecker, main
 2. Run `osascript import.scpt session number` where `session` is a folder in lightroom and `number` is the number of the photographed painting
-3. Lightroom activates and a dialog opens up where you need to paste the automatically copied number into the name and click ok. The color profile is being exported in the background, and you're now in develop mode on the main photo.
-4. Straighten it out using guided transform, and crop it.
+3. Wait until the dialog box is gone (filled automatically), you end in develop mode, so straighten out the photo using guided transform, and crop it.
 5. Restart lightroom (this is necessary for it to see the new profile), and run the second script to apply the profile
 6. You end in develop mode where manual tweaks can be made.
 

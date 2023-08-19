@@ -15,7 +15,6 @@ on run argv
     -- activate Lightroom and wait
     tell application "Adobe Lightroom Classic"
         activate
-        delay 1
     end tell
 
     -- Step 2: Simulate keystrokes or actions to run your Lightroom script.
@@ -30,5 +29,23 @@ on run argv
             end tell
         end tell
     end tell
-end run
 
+    -- Step 3: Fill in and click through the export dialog.
+    delay 8
+    tell application "System Events"
+        tell process "Adobe Lightroom Classic"
+            set frontWindow to front window
+            
+            try
+                set theValue to value of text field 1 of scroll area 2 of frontWindow
+                if theValue is "Untitled profile" then
+                    set focused of text field 1 of scroll area 2 of frontWindow to true
+                    delay 1
+                    keystroke (the clipboard)  -- this includes a return, so it is accepted immediately
+                end if
+            on error errorMessage
+                log "Error setting text field: " & errorMessage
+            end try
+        end tell
+    end tell
+end run
