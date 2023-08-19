@@ -3,6 +3,7 @@ local catalog = import "LrApplication".activeCatalog()
 local LrDialogs = import 'LrDialogs'
 local LrFileUtils = import 'LrFileUtils'
 local LrApplicationView = import 'LrApplicationView'
+local LrApplication = import 'LrApplication'
 local LrDevelopController = import 'LrDevelopController'
 
 
@@ -10,6 +11,7 @@ LrTasks.startAsyncTask( function()
     local photos = AddPhotosFromFolder()
     local number, main_photo, colorchecker_photo, flatfield_photo = findPhotoTypes(photos)
     AddKeywords(number, main_photo, colorchecker_photo, flatfield_photo)
+    ApplyMetadataPresets(main_photo, colorchecker_photo, flatfield_photo)
     startProfileExport(number, colorchecker_photo)
     LrTasks.sleep(1)  -- seems necessary, but don't actually have to finish dialog
     startDeveloping(main_photo)
@@ -116,6 +118,17 @@ function AddKeywords(number, main_photo, colorchecker_photo, flatfield_photo)
     end)
 end
 
+
+function ApplyMetadataPresets(main_photo, colorchecker_photo, flatfield_photo)
+    local preset_name = "2023 Aron Jansen"
+    local metadata_preset = LrApplication.metadataPresets()[preset_name]
+
+    catalog:withWriteAccessDo("Apply metadata presets", function()
+        main_photo:applyMetadataPreset(metadata_preset)
+        colorchecker_photo:applyMetadataPreset(metadata_preset)
+        flatfield_photo:applyMetadataPreset(metadata_preset)
+    end)
+end
 
 -- Copies the develop settings from main_photo to colorchecker_photo and flatfield_photo
 function copySettings(main_photo, colorchecker_photo, flatfield_photo)
