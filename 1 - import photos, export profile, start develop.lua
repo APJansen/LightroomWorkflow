@@ -9,6 +9,7 @@ local LrDevelopController = import 'LrDevelopController'
 LrTasks.startAsyncTask( function()
     local photos = AddPhotosFromFolder()
     local number, main_photo, colorchecker_photo, flatfield_photo = findPhotoTypes(photos)
+    AddKeywords(number, main_photo, colorchecker_photo, flatfield_photo)
     startProfileExport(number, colorchecker_photo)
     LrTasks.sleep(1)  -- seems necessary, but don't actually have to finish dialog
     startDeveloping(main_photo)
@@ -22,7 +23,7 @@ function AddPhotosFromFolder()
     -- find the folder
     for _, source in ipairs(sources) do
         if source.getName then
-            folder = source
+            local folder = source
         end
     end
 
@@ -31,7 +32,7 @@ function AddPhotosFromFolder()
     -- now of all files in the folder
     local photos_in_folder = LrFileUtils.files( folder:getPath())
     -- import the new ones
-    new_photos = {}
+    local new_photos = {}
     for photo in photos_in_folder do
         local found = false
         for _, catalog_photo in ipairs(photos_in_catalog) do
@@ -57,7 +58,6 @@ end
 function findPhotoTypes(photos)
     if #photos ~= 3 then
         LrDialogs.message("Error", "Please select 3 photos, found "..#photos, "critical")
-        return
     end
 
     -- extract the number
@@ -67,7 +67,6 @@ function findPhotoTypes(photos)
         local name = photo:getFormattedMetadata('fileName')
         if not name:match("^"..number) then
             LrDialogs.message("Error", "Please select 3 photos with the same number, found "..name, "critical")
-            return
         end
     end
     local main_photo, colorchecker_photo, flatfield_photo
@@ -80,10 +79,41 @@ function findPhotoTypes(photos)
         elseif name:match("^"..number..".rw2") then
             main_photo = photo
         else
-            return nil
+            LrDialogs.message("Error", "Please select 3 photos with the same number, found "..name, "critical")
         end
     end
     return number, main_photo, colorchecker_photo, flatfield_photo
+end
+
+
+function AddKeywords(number, main_photo, colorchecker_photo, flatfield_photo)
+    local painting_keyword = nil
+    local number_keyword = nil
+    local highres_keyword = nil
+    local colorchecker_keyword = nil
+    local flatfield_keyword = nil
+
+    catalog:withWriteAccessDo("create Keywords", function()
+        painting_keyword = catalog:createKeyword("painting", {}, true, nil, true)
+        number_keyword = catalog:createKeyword(number, {}, true, nil, true)
+        highres_keyword = catalog:createKeyword("highres", {}, true, nil, true)
+        colorchecker_keyword = catalog:createKeyword("colorchecker", {}, true, nil, true)
+        flatfield_keyword = catalog:createKeyword("flatfield", {}, true, nil, true)
+    end)
+
+    catalog:withWriteAccessDo("Apply Keywords", function()
+        main_photo:addKeyword(number_keyword)
+        colorchecker_photo:addKeyword(number_keyword)
+        flatfield_photo:addKeyword(number_keyword)
+
+        main_photo:addKeyword(painting_keyword)
+        colorchecker_photo:addKeyword(painting_keyword)
+        flatfield_photo:addKeyword(painting_keyword)
+
+        main_photo:addKeyword(highres_keyword)
+        colorchecker_photo:addKeyword(colorchecker_keyword)
+        flatfield_photo:addKeyword(flatfield_keyword)
+    end)
 end
 
 
