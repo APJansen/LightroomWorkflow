@@ -3,7 +3,9 @@
 # Usage: ./rename_files.sh <target_folder> <number> [directory]
 # Default directory is /Users/aronjansen/Documents/fotos_temp
 
+# THe directory to which the tether software saves the photos
 TETHER_DIR="/Users/aronjansen/Documents/fotos_temp"
+# The path where lightroom will read the photos
 TARGET_DIR="/Users/aronjansen/Dropbox/persoonlijk/fotos/kunstKoeno/sessies"
 
 # Check if the number of arguments is correct

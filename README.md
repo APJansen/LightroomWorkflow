@@ -3,7 +3,6 @@
 1. Edit `copy_scripts.sh` to point to your Lightroom Scripts path and run it (`./copy_scripts.sh`) (the scripts folder may not exist, it will be created)
 2. Edit `rename_files.sh` to point to a folder that the tether software stores photos in, and to a target folder within lightroom
 3. Restart lightroom to make the scripts appear on the menu bar, to the right of 'help'
-4. In the grid view, turn on a filter for the highres keyword, and lock it
 
 # Usage
 1. Take 3 photos in the order flatfield, colorchecker, main

@@ -6,6 +6,9 @@ local LrApplicationView = import 'LrApplicationView'
 local LrApplication = import 'LrApplication'
 
 
+local PRESET_NAME = "2023 Aron Jansen"
+
+
 LrTasks.startAsyncTask( function()
     local photos = AddPhotosFromFolder()
     local number, main_photo, colorchecker_photo, flatfield_photo = findPhotoTypes(photos)
@@ -119,7 +122,7 @@ end
 
 
 function ApplyMetadataPresets(main_photo, colorchecker_photo, flatfield_photo)
-    local preset_name = "2023 Aron Jansen"
+    local preset_name = PRESET_NAME
     local metadata_preset = LrApplication.metadataPresets()[preset_name]
 
     catalog:withWriteAccessDo("Apply metadata presets", function()
