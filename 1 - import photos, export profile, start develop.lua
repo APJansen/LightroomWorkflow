@@ -70,15 +70,15 @@ function findPhotoTypes(photos)
     for i, photo in ipairs(photos) do
         local name = photo:getFormattedMetadata('fileName')
         if not name:match("^"..number) then
-            LrDialogs.message("Error", "Please select 3 photos with the same number, found "..name, "critical")
+            LrDialogs.message("Error", "Please select 3 photos with the same number, found file "..name.."but number is "..number, "critical")
         end
     end
     local main_photo, colorchecker_photo, flatfield_photo
     for i, photo in ipairs(photos) do
         local name = photo:getFormattedMetadata('fileName')
-        if name:match("^"..number.." %- flatfield.rw2") then
+        if name:match("^"..number.."%-flatfield.rw2") then
             flatfield_photo = photo
-        elseif name:match("^"..number.." %- colorchecker.rw2") then
+        elseif name:match("^"..number.."%-colorchecker.rw2") then
             colorchecker_photo = photo
         elseif name:match("^"..number..".rw2") then
             main_photo = photo

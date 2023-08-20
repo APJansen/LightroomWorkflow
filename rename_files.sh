@@ -39,7 +39,7 @@ if [ ${#files_array[@]} -lt 3 ]; then
 fi
 
 # Define new names
-names=("$number" "$number - colorchecker" "$number - flatfield")
+names=("$number" "$number-colorchecker" "$number-flatfield")
 
 # Rename the 3 most recently added files and move them to target_directory
 for i in {0..2}; do
