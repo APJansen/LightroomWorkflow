@@ -43,7 +43,8 @@ on run argv
                 if theValue is "Untitled profile" then
                     set focused of text field 1 of scroll area 2 of frontWindow to true
                     delay 1
-                    keystroke (the clipboard)  -- this includes a return, so it is accepted immediately
+                    keystroke (the clipboard)
+                    keystroke return
                 end if
             on error errorMessage
                 log "Error setting text field: " & errorMessage

@@ -153,6 +153,7 @@ end
 function startProfileExport(number, colorchecker_photo)
     CopyToClipboard(number)
     catalog:setSelectedPhotos(colorchecker_photo, {})
+    LrTasks.sleep(2)
     colorchecker_photo:openExportDialog()
 end
 
@@ -171,7 +172,7 @@ function CopyToClipboard(textString)
     return
   end
 
-  outClipFile:write(textString,'\n')
+  outClipFile:write(textString)
 
   -- Close the file pointer on the output textfile
   outClipFile:close()
